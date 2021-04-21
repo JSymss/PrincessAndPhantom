@@ -29,14 +29,28 @@ public class CarController : MonoBehaviour
     public Transform leftFrontWheel, rightFrontWheel;
     public float maxWheelTurn = 25;
 
+    public GameObject carMesh;
+    public GameObject wheelMesh;
+    public GameObject sledgeMesh;
+    public GameObject trainMesh;
+    public GameObject speedBoatMesh;
+
     public enum Surface { Ground, Ice, Water, Tracks, Air };
     Surface mySurface;
-
+    public enum State { Car, Sledge, SpeedBoat, Train };
+    State myState;
     void Start()
     {
         // detatch the rigidbody from the car
         sphereRB.transform.parent = null;
         mySurface = Surface.Ground;
+
+        carMesh.SetActive(true);
+        wheelMesh.SetActive(true);
+        sledgeMesh.SetActive(false);
+        speedBoatMesh.SetActive(false);
+        trainMesh.SetActive(false);
+        myState = State.Car;
     }
 
 
@@ -89,9 +103,8 @@ public class CarController : MonoBehaviour
         // turn wheels
         leftFrontWheel.localRotation = Quaternion.Euler(leftFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, leftFrontWheel.localRotation.eulerAngles.z);
         rightFrontWheel.localRotation = Quaternion.Euler(rightFrontWheel.localRotation.eulerAngles.x, turnInput * maxWheelTurn, rightFrontWheel.localRotation.eulerAngles.z);
-        
-        // spin the wheels
-        rightFrontWheel.transform.Rotate(1f, 0, 0);
+
+
 
         // set variables based on surface type
         if (mySurface == Surface.Ground)
@@ -125,12 +138,55 @@ public class CarController : MonoBehaviour
         if (mySurface == Surface.Air)
         {
             sphereRB.drag = airDrag;
-            turnSpeed = 30f;
+            turnSpeed = 20f;
         }
-        print(mySurface);
+        // change vehicles
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            carMesh.SetActive(true);
+            wheelMesh.SetActive(true);
+            sledgeMesh.SetActive(false);
+            speedBoatMesh.SetActive(false);
+            trainMesh.SetActive(false);
+            myState = State.Car;
+            Debug.Log(myState);
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            carMesh.SetActive(false);
+            wheelMesh.SetActive(false);
+            sledgeMesh.SetActive(true);
+            speedBoatMesh.SetActive(false);
+            trainMesh.SetActive(false);
+            myState = State.Sledge;
+            Debug.Log(myState);
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            carMesh.SetActive(false);
+            wheelMesh.SetActive(false);
+            sledgeMesh.SetActive(false);
+            speedBoatMesh.SetActive(true);
+            trainMesh.SetActive(false);
+            myState = State.SpeedBoat;
+            Debug.Log(myState);
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            carMesh.SetActive(false);
+            wheelMesh.SetActive(false);
+            sledgeMesh.SetActive(false);
+            speedBoatMesh.SetActive(false);
+            trainMesh.SetActive(true);
+            myState = State.Train;
+            Debug.Log(myState);
+        }
     }
     private void FixedUpdate()
     {
+        // spin the wheels
+        // SETINDIVIDUALWHEELSHERE.transform.Rotate(1f, 0, 0);
+
         // add extra gravity
         sphereRB.AddForce(0, -gravity, 0);
 
@@ -139,7 +195,6 @@ public class CarController : MonoBehaviour
         {
             // move car
             sphereRB.AddForce(transform.forward * moveInput, ForceMode.Acceleration);
-
         }
         // if raycast hits nothing (air)
         if(mySurface == Surface.Air)

@@ -51,6 +51,7 @@ public class CarController : MonoBehaviour
         speedBoatMesh.SetActive(false);
         trainMesh.SetActive(false);
         myState = State.Car;
+
     }
 
 
@@ -118,22 +119,22 @@ public class CarController : MonoBehaviour
         {
             sphereRB.drag = iceDrag;
             turnSpeed = 75f;
-            fwdSpeed = 250f;
-            revSpeed = 150f;
+            fwdSpeed = 150f;
+            revSpeed = 75f;
         }
         if (mySurface == Surface.Water)
         {
             sphereRB.drag = waterDrag;
             turnSpeed = 75f;
-            fwdSpeed = 250f;
-            revSpeed = 150f;
+            fwdSpeed = 200f;
+            revSpeed = 100f;
         }
         if (mySurface == Surface.Tracks)
         {
             sphereRB.drag = tracksDrag;
-            turnSpeed = 50f;
-            fwdSpeed = 150f;
-            revSpeed = 75f;
+            turnSpeed = 25f;
+            fwdSpeed = 200f;
+            revSpeed = 100f;
         }
         if (mySurface == Surface.Air)
         {
@@ -189,7 +190,7 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         // spin the wheels
-        // SETINDIVIDUALWHEELSHERE.transform.Rotate(1f, 0, 0);
+        // NOTHING WORKS OMG
 
         // add extra gravity
         sphereRB.AddForce(0, -gravity, 0);

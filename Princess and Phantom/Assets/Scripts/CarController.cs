@@ -38,7 +38,7 @@ public class CarController : MonoBehaviour
     public enum Surface { Ground, Ice, Water, Tracks, Air };
     Surface mySurface;
     public enum State { Car, Sledge, SpeedBoat, Train };
-    State myState;
+    public State myState;
     void Start()
     {
         // detatch the rigidbody from the car
@@ -150,6 +150,7 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.Car;
             Debug.Log(myState);
+            GetComponent<EventManager>().VehicleState();
         }
         if (Input.GetKey(KeyCode.Alpha2))
         {
@@ -160,6 +161,7 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.Sledge;
             Debug.Log(myState);
+            GetComponent<EventManager>().VehicleState();
         }
         if (Input.GetKey(KeyCode.Alpha3))
         {
@@ -170,6 +172,7 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.SpeedBoat;
             Debug.Log(myState);
+            GetComponent<EventManager>().VehicleState();
         }
         if (Input.GetKey(KeyCode.Alpha4))
         {
@@ -180,6 +183,7 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(true);
             myState = State.Train;
             Debug.Log(myState);
+            GetComponent<EventManager>().VehicleState();
         }
     }
     private void FixedUpdate()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarController : MonoBehaviour
 {
@@ -14,13 +15,17 @@ public class CarController : MonoBehaviour
     public float waterDrag;
     public float tracksDrag;
     public float airDrag;
-
     public float smoothCarRotation = 1f;
     public float gravity;
-
     public float fwdSpeed;
     public float revSpeed;
     public float turnSpeed;
+    public float jumpPower = 3000f;
+    public static int respawnCheckpoint=1;
+
+    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
+    bool jumping;
+
     public LayerMask groundLayer;
     public LayerMask iceLayer;
     public LayerMask waterLayer;
@@ -34,7 +39,10 @@ public class CarController : MonoBehaviour
     public GameObject sledgeMesh;
     public GameObject trainMesh;
     public GameObject speedBoatMesh;
+    public GameObject respawnPoint, respawnPoint2;
 
+    public RawImage carImage, sledgeImage, speedboatImage, trainImage;
+    public RawImage sledgeImageLock, speedboatImageLock, trainImageLock;
     public enum Surface { Ground, Ice, Water, Tracks, Air };
     Surface mySurface;
     public enum State { Car, Sledge, SpeedBoat, Train };
@@ -52,11 +60,31 @@ public class CarController : MonoBehaviour
         trainMesh.SetActive(false);
         myState = State.Car;
 
+        // set UI 
+        carImage.color = new Color32(255, 255, 255, 255);
+        sledgeImage.color = new Color32(80, 80, 80, 150);
+        speedboatImage.color = new Color32(80, 80, 80, 150);
+        trainImage.color = new Color32(80, 80, 80, 150);
+
     }
 
 
     void Update()
     {
+        // set UI lock blackouts
+        if (sledgeUnlock)
+        {
+            sledgeImageLock.color = new Color32(0, 0, 0, 0);
+        }
+        if (speedBoatUnlock)
+        {
+            speedboatImageLock.color = new Color32(0, 0, 0, 0);
+        }
+        if (trainUnlock)
+        {
+            trainImageLock.color = new Color32(0, 0, 0, 0);
+        }
+
         moveInput = Input.GetAxisRaw("Vertical");
         turnInput = Input.GetAxisRaw("Horizontal");
         
@@ -118,9 +146,9 @@ public class CarController : MonoBehaviour
         if (mySurface == Surface.Ice)
         {
             sphereRB.drag = iceDrag;
-            turnSpeed = 75f;
-            fwdSpeed = 150f;
-            revSpeed = 75f;
+            turnSpeed = 120f;
+            fwdSpeed = 175f;
+            revSpeed = 100f;
         }
         if (mySurface == Surface.Water)
         {
@@ -128,6 +156,20 @@ public class CarController : MonoBehaviour
             turnSpeed = 75f;
             fwdSpeed = 200f;
             revSpeed = 100f;
+            if(myState != State.SpeedBoat)
+            {
+                // respawn at this point if you're in water and not in a speedboat
+                if (respawnCheckpoint == 1)
+                {
+                    transform.position = respawnPoint.transform.position;
+                    sphereRB.position = respawnPoint.transform.position;
+                }
+                if (respawnCheckpoint == 2)
+                {
+                    transform.position = respawnPoint2.transform.position;
+                    sphereRB.position = respawnPoint2.transform.position;
+                }
+            }
         }
         if (mySurface == Surface.Tracks)
         {
@@ -141,8 +183,33 @@ public class CarController : MonoBehaviour
             sphereRB.drag = airDrag;
             turnSpeed = 20f;
         }
+        // change speeds based on state and surface
+        if (myState == State.Car)
+        {
+            if (mySurface != Surface.Ground)
+            {
+                fwdSpeed = 50f;
+                revSpeed = 25f;
+            }
+        }
+        if (myState == State.SpeedBoat)
+        {
+            if(mySurface != Surface.Water)
+            {
+                fwdSpeed = 50f;
+                revSpeed = 25f;
+            }
+        }
+        if (myState == State.Sledge)
+        {
+            if (mySurface != Surface.Ice)
+            {
+                fwdSpeed = 50f;
+                revSpeed = 25f;
+            }
+        }
         // change vehicles
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             carMesh.SetActive(true);
             wheelMesh.SetActive(true);
@@ -151,9 +218,14 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.Car;
             Debug.Log(myState);
+            // set UI 
+            carImage.color = new Color32(255, 255, 255, 255);
+            sledgeImage.color = new Color32(80, 80, 80, 150);
+            speedboatImage.color = new Color32(80, 80, 80, 150);
+            trainImage.color = new Color32(80, 80, 80, 150);
             GetComponent<analyticsEventManager>().VehicleState();
         }
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2)&&sledgeUnlock==true)
         {
             carMesh.SetActive(false);
             wheelMesh.SetActive(false);
@@ -162,9 +234,14 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.Sledge;
             Debug.Log(myState);
+            // set UI 
+            sledgeImage.color = new Color32(255, 255, 255, 255);
+            carImage.color = new Color32(80, 80, 80, 150);
+            speedboatImage.color = new Color32(80, 80, 80, 150);
+            trainImage.color = new Color32(80, 80, 80, 150);
             GetComponent<analyticsEventManager>().VehicleState();
         }
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && speedBoatUnlock == true)
         {
             carMesh.SetActive(false);
             wheelMesh.SetActive(false);
@@ -173,9 +250,14 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(false);
             myState = State.SpeedBoat;
             Debug.Log(myState);
+            // set UI 
+            speedboatImage.color = new Color32(255, 255, 255, 255);
+            carImage.color = new Color32(80, 80, 80, 150);
+            sledgeImage.color = new Color32(80, 80, 80, 150);
+            trainImage.color = new Color32(80, 80, 80, 150);
             GetComponent<analyticsEventManager>().VehicleState();
         }
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && trainUnlock == true)
         {
             carMesh.SetActive(false);
             wheelMesh.SetActive(false);
@@ -184,7 +266,32 @@ public class CarController : MonoBehaviour
             trainMesh.SetActive(true);
             myState = State.Train;
             Debug.Log(myState);
+            // set UI 
+            trainImage.color = new Color32(255, 255, 255, 255);
+            carImage.color = new Color32(80, 80, 80, 150);
+            sledgeImage.color = new Color32(80, 80, 80, 150);
+            speedboatImage.color = new Color32(80, 80, 80, 150);
             GetComponent<analyticsEventManager>().VehicleState();
+        }
+        if (Input.GetKeyDown(KeyCode.Space)&& mySurface != Surface.Air)
+        {
+            Debug.Log("jumping");
+            sphereRB.AddForce(transform.up * jumpPower);
+            StartCoroutine(JumpBool());
+        }
+        // press R to restart from a checkpoint
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            if (respawnCheckpoint == 1)
+            {
+                transform.position = respawnPoint.transform.position;
+                sphereRB.position = respawnPoint.transform.position;
+            }
+            if (respawnCheckpoint == 2)
+            {
+                transform.position = respawnPoint2.transform.position;
+                sphereRB.position = respawnPoint2.transform.position;
+            }
         }
     }
     private void FixedUpdate()
@@ -204,12 +311,24 @@ public class CarController : MonoBehaviour
         // if raycast hits nothing (air)
         if(mySurface == Surface.Air)
         {
+            Debug.Log("Airbourne");
             // add engine weight
-            if (transform.rotation.x < 30 && transform.rotation.x > -85)
+            if (jumping == false)
             {
+                Debug.Log("jumping = false");
                 transform.Rotate(1f, 0, 0);
             }
         }
 
     }
+    IEnumerator JumpBool()
+    {
+        Debug.Log("start jump");
+        jumping = true;
+        yield return new WaitForSeconds(.5f);
+        jumping = false;
+        Debug.Log("end jump");
+    }
+   
 }
+

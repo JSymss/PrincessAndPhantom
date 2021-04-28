@@ -6,17 +6,14 @@ using UnityEngine.SceneManagement;
 public class SphereRBScript : MonoBehaviour
 {
     public Animator anim;
-    GameObject jettyTrack, jettyTarget;
+    GameObject jettyTrack;
     GameObject[] jettyJumps;
-    public float hiddenDistance;
     public bool safeFromPirates = false;
 
     private void Start()
     {
         jettyTrack = GameObject.FindGameObjectWithTag("JettyTrack");
-        jettyTarget = GameObject.FindGameObjectWithTag("Target");
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
-        jettyTarget.transform.position = new Vector3(jettyTrack.transform.position.x, -300f, jettyTrack.transform.position.z);
         CarController.speedBoatUnlock = false;
         CarController.respawnCheckpoint = 1;
     }
@@ -38,9 +35,9 @@ public class SphereRBScript : MonoBehaviour
             {
                 Destroy(ramp);
             }
+            Destroy(jettyTrack);
             CarController.speedBoatUnlock = true;
             CarController.respawnCheckpoint = 2;
-            jettyTrack.transform.position = Vector3.MoveTowards(jettyTrack.transform.position, jettyTarget.transform.position, hiddenDistance);
             safeFromPirates = true;
             StartCoroutine(Wait());
         }

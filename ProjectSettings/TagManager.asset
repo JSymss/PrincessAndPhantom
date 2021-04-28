@@ -7,6 +7,8 @@ TagManager:
   - JettyTrack
   - Target
   - JettyJump
+  - Pirate
+  - MotorSphere
   layers:
   - Default
   - TransparentFX

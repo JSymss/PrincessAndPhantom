@@ -9,6 +9,7 @@ public class SphereRBScript : MonoBehaviour
     GameObject jettyTrack, jettyTarget;
     GameObject[] jettyJumps;
     public float hiddenDistance;
+    public bool safeFromPirates = false;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class SphereRBScript : MonoBehaviour
             CarController.speedBoatUnlock = true;
             CarController.respawnCheckpoint = 2;
             jettyTrack.transform.position = Vector3.MoveTowards(jettyTrack.transform.position, jettyTarget.transform.position, hiddenDistance);
+            safeFromPirates = true;
             StartCoroutine(Wait());
         }
         if(col.gameObject.name == "DoorToIceLevel")
@@ -49,6 +51,14 @@ public class SphereRBScript : MonoBehaviour
         if (col.gameObject.name == "DoorToHubLevel")
         {
             SceneManager.LoadScene("Hub_Level");
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.name == "TownTrigger")
+        {
+            safeFromPirates = false;
         }
     }
     IEnumerator Wait()

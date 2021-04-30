@@ -16,12 +16,14 @@ public class Pirate : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         pirates = GameObject.FindGameObjectsWithTag("Pirate");
+        // calling the safeFromPirates bool from the SphereRBScript to stop pirates shooting at player when in town
         safe = GameObject.FindGameObjectWithTag("MotorSphere").GetComponent<SphereRBScript>().safeFromPirates;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if player isn't safe, rotate towards their position and shoot cannonballs
         if (safe == false)
         {
             for (int i = 0; i < pirates.Length; i++)

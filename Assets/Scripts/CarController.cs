@@ -22,8 +22,9 @@ public class CarController : MonoBehaviour
     public float turnSpeed;
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
+    public int health;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
+    public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -40,6 +41,7 @@ public class CarController : MonoBehaviour
     public GameObject trainMesh;
     public GameObject speedBoatMesh;
     public GameObject respawnPoint, respawnPoint2, respawnPoint3;
+    GameObject waterLevelAudioSource;
 
     public RawImage carImage, sledgeImage, speedboatImage, trainImage;
     public RawImage sledgeImageLock, speedboatImageLock, trainImageLock;
@@ -64,6 +66,7 @@ public class CarController : MonoBehaviour
         sledgeImage.color = new Color32(80, 80, 80, 150);
         speedboatImage.color = new Color32(80, 80, 80, 150);
         trainImage.color = new Color32(80, 80, 80, 150);
+        waterLevelAudioSource = GameObject.FindGameObjectWithTag("WaterLevelAudio");
 
     }
 
@@ -320,6 +323,37 @@ public class CarController : MonoBehaviour
                 sphereRB.transform.rotation = respawnPoint3.transform.rotation;
             }
         }
+
+        // player health for water level
+        if (health <= 0)
+        {
+            if (respawnCheckpoint == 1)
+            {
+                transform.position = respawnPoint.transform.position;
+                transform.rotation = respawnPoint.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint.transform.position;
+                sphereRB.transform.rotation = respawnPoint.transform.rotation;
+            }
+            else if (respawnCheckpoint == 2)
+            {
+                transform.position = respawnPoint2.transform.position;
+                transform.rotation = respawnPoint2.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint2.transform.position;
+                sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+            }
+            else if (respawnCheckpoint == 3)
+            {
+                transform.position = respawnPoint3.transform.position;
+                transform.rotation = respawnPoint3.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint3.transform.position;
+                sphereRB.transform.rotation = respawnPoint3.transform.rotation;
+            }
+        }
+
+        waterLevelAudioSource.transform.position = this.transform.position;
     }
     private void FixedUpdate()
     {

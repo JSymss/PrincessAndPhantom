@@ -14,40 +14,49 @@ public class SphereRBScript : MonoBehaviour
     {
         jettyTrack = GameObject.FindGameObjectWithTag("JettyTrack");
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
-        CarController.speedBoatUnlock = false;
         CarController.respawnCheckpoint = 1;
     }
 
     private void OnTriggerEnter(Collider col)
     {
         print(col.gameObject.name);
-        if (col.gameObject.name == "Sledge Unlock")
-        {
-            Destroy(col.gameObject);
-            CarController.sledgeUnlock = true;
-            CarController.respawnCheckpoint = 2;
-            StartCoroutine(Wait());
-        }
-        else if (col.gameObject.name == "TownTrigger")
-        {
-            Destroy(col.gameObject);
-            foreach (GameObject ramp in jettyJumps)
-            {
-                Destroy(ramp);
-            }
-            Destroy(jettyTrack);
-            CarController.speedBoatUnlock = true;
-            CarController.respawnCheckpoint = 2;
-            safeFromPirates = true;
-            StartCoroutine(Wait());
-        }
-        if(col.gameObject.name == "DoorToIceLevel")
-        {
-            SceneManager.LoadScene("Ice_Level");
-        }
-        if (col.gameObject.name == "DoorToHubLevel")
-        {
-            SceneManager.LoadScene("Hub_Level");
+
+        switch (col.gameObject.name) {
+            
+            case "Sledge Unlock":
+                Destroy(col.gameObject);
+                CarController.sledgeUnlock = true;
+                CarController.respawnCheckpoint = 2;
+                StartCoroutine(Wait());
+                break;
+
+            case "TownTrigger":
+                Destroy(col.gameObject);
+                foreach (GameObject ramp in jettyJumps)
+                {
+                    Destroy(ramp);
+                }
+                Destroy(jettyTrack);
+                CarController.speedBoatUnlock = true;
+                CarController.respawnCheckpoint = 2;
+                safeFromPirates = true;
+                StartCoroutine(Wait());
+                break;
+
+            case "DoorToIceLevel":
+                SceneManager.LoadScene("Ice_Level");
+                break;
+
+            case "DoorToHubLevel":
+                SceneManager.LoadScene("Hub_Level");
+                break;
+
+            case "Respawn Point 3":
+                CarController.respawnCheckpoint = 3;
+                break;
+
+            default:
+                break;
         }
     }
 

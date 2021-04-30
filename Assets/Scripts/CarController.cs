@@ -23,7 +23,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
+    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -39,7 +39,7 @@ public class CarController : MonoBehaviour
     public GameObject sledgeMesh;
     public GameObject trainMesh;
     public GameObject speedBoatMesh;
-    public GameObject respawnPoint, respawnPoint2;
+    public GameObject respawnPoint, respawnPoint2, respawnPoint3;
 
     public RawImage carImage, sledgeImage, speedboatImage, trainImage;
     public RawImage sledgeImageLock, speedboatImageLock, trainImageLock;
@@ -59,7 +59,6 @@ public class CarController : MonoBehaviour
         speedBoatMesh.SetActive(false);
         trainMesh.SetActive(false);
         myState = State.Car;
-
         // set UI 
         carImage.color = new Color32(255, 255, 255, 255);
         sledgeImage.color = new Color32(80, 80, 80, 150);
@@ -162,12 +161,26 @@ public class CarController : MonoBehaviour
                 if (respawnCheckpoint == 1)
                 {
                     transform.position = respawnPoint.transform.position;
+                    transform.rotation = respawnPoint.transform.rotation;
+                    sphereRB.velocity = new Vector3(0, 0, 0);
                     sphereRB.position = respawnPoint.transform.position;
+                    sphereRB.transform.rotation = respawnPoint.transform.rotation;
                 }
-                if (respawnCheckpoint == 2)
+                else if (respawnCheckpoint == 2)
                 {
                     transform.position = respawnPoint2.transform.position;
+                    transform.rotation = respawnPoint2.transform.rotation;
+                    sphereRB.velocity = new Vector3(0, 0, 0);
                     sphereRB.position = respawnPoint2.transform.position;
+                    sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+                }
+                else if (respawnCheckpoint == 3)
+                {
+                    transform.position = respawnPoint3.transform.position;
+                    transform.rotation = respawnPoint3.transform.rotation;
+                    sphereRB.velocity = new Vector3(0, 0, 0);
+                    sphereRB.position = respawnPoint3.transform.position;
+                    sphereRB.transform.rotation = respawnPoint3.transform.rotation;
                 }
             }
         }
@@ -285,12 +298,26 @@ public class CarController : MonoBehaviour
             if (respawnCheckpoint == 1)
             {
                 transform.position = respawnPoint.transform.position;
+                transform.rotation = respawnPoint.transform.rotation;
+                sphereRB.velocity = new Vector3(0,0,0);
                 sphereRB.position = respawnPoint.transform.position;
+                sphereRB.transform.rotation = respawnPoint.transform.rotation;
             }
-            if (respawnCheckpoint == 2)
+            else if (respawnCheckpoint == 2)
             {
                 transform.position = respawnPoint2.transform.position;
+                transform.rotation = respawnPoint2.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint2.transform.position;
+                sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+            }
+            else if (respawnCheckpoint == 3)
+            {
+                transform.position = respawnPoint3.transform.position;
+                transform.rotation = respawnPoint3.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint3.transform.position;
+                sphereRB.transform.rotation = respawnPoint3.transform.rotation;
             }
         }
     }

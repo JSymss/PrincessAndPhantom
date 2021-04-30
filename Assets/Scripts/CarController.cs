@@ -10,6 +10,7 @@ public class CarController : MonoBehaviour
     float moveInput;
     float turnInput;
 
+    public float health;
     public float groundDrag;
     public float iceDrag;
     public float waterDrag;
@@ -328,6 +329,15 @@ public class CarController : MonoBehaviour
                 sphereRB.position = respawnPoint3.transform.position;
                 sphereRB.transform.rotation = respawnPoint3.transform.rotation;
             }
+        }
+        // when health = 0, respawn
+        if (health <= 0)
+        {
+            transform.position = respawnPoint.transform.position;
+            transform.rotation = respawnPoint.transform.rotation;
+            sphereRB.velocity = new Vector3(0, 0, 0);
+            sphereRB.position = respawnPoint.transform.position;
+            sphereRB.transform.rotation = respawnPoint.transform.rotation;
         }
     }
     private void FixedUpdate()

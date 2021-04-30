@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ice_Level.unity
     guid: f8ec8d46549bbde498ebf1b8a9e108f9
+  - enabled: 1
+    path: Assets/Scenes/Water_Level.unity
+    guid: 266d0af28d2127449a8d5fa25fc480bb
   m_configObjects: {}

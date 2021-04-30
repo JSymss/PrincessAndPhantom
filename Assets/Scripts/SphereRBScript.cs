@@ -37,8 +37,8 @@ public class SphereRBScript : MonoBehaviour
                 StartCoroutine(Wait());
                 break;
 
+            // destroys the jetty track, unlocks the speedboat, sets respawn point to the town, stops pirates shooting at player when they're in the town, and calls the unlock animation
             case "TownTrigger":
-                Destroy(col.gameObject);
                 foreach (GameObject ramp in jettyJumps)
                 {
                     Destroy(ramp);
@@ -56,6 +56,10 @@ public class SphereRBScript : MonoBehaviour
 
             case "DoorToHubLevel":
                 SceneManager.LoadScene("Hub_Level");
+                break;
+
+            case "DoorToWaterLevel":
+                SceneManager.LoadScene("Water_Level");
                 break;
 
             case "Respawn Point 3":
@@ -84,6 +88,7 @@ public class SphereRBScript : MonoBehaviour
 
     private void OnTriggerExit(Collider col)
     {
+        // restarts pirates shooting at player when they leave the town
         if (col.gameObject.name == "TownTrigger")
         {
             safeFromPirates = false;

@@ -9,6 +9,7 @@ TagManager:
   - JettyJump
   - Pirate
   - MotorSphere
+  - Rocks
   layers:
   - Default
   - TransparentFX

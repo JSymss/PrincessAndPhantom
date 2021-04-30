@@ -23,7 +23,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
+    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = true;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -40,13 +40,14 @@ public class CarController : MonoBehaviour
     public GameObject trainMesh;
     public GameObject speedBoatMesh;
     public GameObject respawnPoint, respawnPoint2, respawnPoint3;
+    public GameObject iceTerrainCheckpoint;
 
     public RawImage carImage, sledgeImage, speedboatImage, trainImage;
     public RawImage sledgeImageLock, speedboatImageLock, trainImageLock;
     public enum Surface { Ground, Ice, Water, Tracks, Air };
     Surface mySurface;
     public enum State { Car, Sledge, SpeedBoat, Train };
-    public State myState;
+    public static State myState;
     void Start()
     {
         // detatch the rigidbody from the car
@@ -64,6 +65,8 @@ public class CarController : MonoBehaviour
         sledgeImage.color = new Color32(80, 80, 80, 150);
         speedboatImage.color = new Color32(80, 80, 80, 150);
         trainImage.color = new Color32(80, 80, 80, 150);
+
+        respawnCheckpoint = 1;
 
     }
 
@@ -221,6 +224,12 @@ public class CarController : MonoBehaviour
                 revSpeed = 25f;
             }
         }
+         if (myState == State.Train)
+        {
+            fwdSpeed = 300f;
+            revSpeed = 150f;
+            turnSpeed = 30f;
+        }
         // change vehicles
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -355,6 +364,14 @@ public class CarController : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         jumping = false;
         Debug.Log("end jump");
+    }
+    public void TeleportToIceTerrain()
+    {
+        transform.position = iceTerrainCheckpoint.transform.position;
+        transform.rotation = iceTerrainCheckpoint.transform.rotation;
+        sphereRB.velocity = new Vector3(0, 0, 0);
+        sphereRB.position = iceTerrainCheckpoint.transform.position;
+        sphereRB.transform.rotation = iceTerrainCheckpoint.transform.rotation;
     }
    
 }

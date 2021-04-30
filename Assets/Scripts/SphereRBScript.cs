@@ -9,12 +9,19 @@ public class SphereRBScript : MonoBehaviour
     GameObject jettyTrack;
     GameObject[] jettyJumps;
     public bool safeFromPirates = false;
+    public CarController ccReference;
+    GameObject[] rocks;
 
     private void Start()
     {
         jettyTrack = GameObject.FindGameObjectWithTag("JettyTrack");
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
-        CarController.respawnCheckpoint = 1;
+        rocks = GameObject.FindGameObjectsWithTag("Rocks");
+
+
+
+        
+
     }
 
     private void OnTriggerEnter(Collider col)
@@ -53,6 +60,21 @@ public class SphereRBScript : MonoBehaviour
 
             case "Respawn Point 3":
                 CarController.respawnCheckpoint = 3;
+                break;
+
+            case "DoorToIceTerrain":
+                ccReference.TeleportToIceTerrain();
+                break;
+
+            case "Rocks":
+                if (CarController.myState == CarController.State.Train)
+                {
+                    foreach (GameObject stone in rocks)
+                    {
+                        Rigidbody rb = stone.GetComponent<Rigidbody>();
+                        rb.isKinematic = false;
+                    }
+                }
                 break;
 
             default:

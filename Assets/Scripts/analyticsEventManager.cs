@@ -37,7 +37,7 @@ public class analyticsEventManager : MonoBehaviour
 
     public void VehicleState()
     {
-        switch (GetComponent<CarController>().myState)
+        switch (CarController.myState)
         {
             case CarController.State.Sledge:
                 Analytics.CustomEvent("vehicle_change", new Dictionary<string, object>

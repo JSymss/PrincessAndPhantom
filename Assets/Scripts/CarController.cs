@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
     float moveInput;
     float turnInput;
 
-    public float health;
+    public int health = 3;
     public float groundDrag;
     public float iceDrag;
     public float waterDrag;
@@ -24,7 +24,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = true;
+    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -68,6 +68,7 @@ public class CarController : MonoBehaviour
         trainImage.color = new Color32(80, 80, 80, 150);
 
         respawnCheckpoint = 1;
+        health = 3;
 
     }
 
@@ -331,8 +332,9 @@ public class CarController : MonoBehaviour
             }
         }
         // when health = 0, respawn
-        if (health <= 0)
+        if (health == 0)
         {
+            Debug.Log("You died");
             transform.position = respawnPoint.transform.position;
             transform.rotation = respawnPoint.transform.rotation;
             sphereRB.velocity = new Vector3(0, 0, 0);

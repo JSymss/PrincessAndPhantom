@@ -11,6 +11,7 @@ public class SphereRBScript : MonoBehaviour
     public bool safeFromPirates = false;
     public CarController ccReference;
     GameObject[] rocks;
+    public CameraController CameraController;
 
     private void Start()
     {
@@ -29,10 +30,23 @@ public class SphereRBScript : MonoBehaviour
         print(col.gameObject.name);
 
         switch (col.gameObject.name) {
+
+            case "TunnelCamera":
+                Vector3 newPosition = CameraController.cameraTarget.transform.position;
+                newPosition.y -= 5;
+                CameraController.cameraTarget.transform.position = newPosition;
+                break;
             
             case "Sledge Unlock":
                 Destroy(col.gameObject);
                 CarController.sledgeUnlock = true;
+                CarController.respawnCheckpoint = 2;
+                StartCoroutine(Wait());
+                break;
+
+            case "Train Unlock":
+                Destroy(col.gameObject);
+                CarController.trainUnlock = true;
                 CarController.respawnCheckpoint = 2;
                 StartCoroutine(Wait());
                 break;
@@ -85,13 +99,23 @@ public class SphereRBScript : MonoBehaviour
                 break;
         }
     }
-
     private void OnTriggerExit(Collider col)
     {
         // restarts pirates shooting at player when they leave the town
-        if (col.gameObject.name == "TownTrigger")
-        {
+        switch (col.gameObject.name) {
+            
+            case "TownTrigger":
             safeFromPirates = false;
+                break;
+            
+            case "TunnelCamera":
+                Vector3 newPosition = CameraController.cameraTarget.transform.position;
+                newPosition.y += 5;
+                CameraController.cameraTarget.transform.position = newPosition;
+                
+                break;
+            default:
+                break;
         }
     }
     IEnumerator Wait()

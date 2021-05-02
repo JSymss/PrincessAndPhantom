@@ -10,8 +10,26 @@ public class MenuScript : MonoBehaviour
     public AudioSource carKeys;
     public GameObject controls;
     public GameObject winScreen;
+    public GameObject healthBar;
+    public GameObject heart1;
+    public GameObject heart2;
+    public GameObject heart3;
+    GameObject player;
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        if (SceneManager.GetActiveScene().name == "Water_Level")
+        {
+            healthBar.gameObject.SetActive(true);
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(true);
+        }
+        else
+        {
+            healthBar.gameObject.SetActive(false);
+        }
         menu.gameObject.SetActive(false);
         controls.gameObject.SetActive(false);
         if (winScreen != null)
@@ -38,6 +56,27 @@ public class MenuScript : MonoBehaviour
                 paused = false;
                 Cursor.visible = false;
             }
+        }
+        switch(player.GetComponent<CarController>().health)
+        {
+            case 3:
+            heart1.gameObject.SetActive(true);
+            heart2.gameObject.SetActive(true);
+            heart3.gameObject.SetActive(true);
+                break;
+            case 2:
+                heart1.gameObject.SetActive(true);
+                heart2.gameObject.SetActive(true);
+                heart3.gameObject.SetActive(false);
+                break;
+            case 1:
+                heart1.gameObject.SetActive(true);
+                heart2.gameObject.SetActive(false);
+                heart3.gameObject.SetActive(false);
+                break;
+
+            default:
+                break;
         }
     }
     

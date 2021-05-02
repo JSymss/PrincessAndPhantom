@@ -12,6 +12,7 @@ public class CarController : MonoBehaviour
     float turnInput;
 
     public int health = 3;
+
     public float groundDrag;
     public float iceDrag;
     public float waterDrag;
@@ -25,7 +26,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
+    public static bool sledgeUnlock = true, speedBoatUnlock = true, trainUnlock = true;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -309,6 +310,8 @@ public class CarController : MonoBehaviour
             Debug.Log("jumping");
             sphereRB.AddForce(transform.up * jumpPower);
             StartCoroutine(JumpBool());
+            AudioSource jump = GetComponent<AudioSource>();
+            jump.Play();
         }
         // press R to restart from a checkpoint
         if (Input.GetKeyDown(KeyCode.R))

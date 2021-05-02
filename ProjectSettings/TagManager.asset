@@ -11,6 +11,11 @@ TagManager:
   - MotorSphere
   - Rocks
   - RocksHub
+  - WaterLevelAudio
+  - DoorToFinalLevel
+  - Unlock
+  - ExplodeRocks
+  - ExplodeRocksHub
   layers:
   - Default
   - TransparentFX

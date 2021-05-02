@@ -15,6 +15,12 @@ public class SphereRBScript : MonoBehaviour
     public CameraController CameraController;
     public GameObject menu;
     public GameObject winScreen;
+    Rigidbody rb;
+    AudioSource engine;
+    bool doorOpen = false;
+    bool doorOnce = true;
+    bool rocksExploded = false;
+    bool rocksHubExploded = false;
 
     private void Start()
     {
@@ -22,6 +28,13 @@ public class SphereRBScript : MonoBehaviour
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
         rocks = GameObject.FindGameObjectsWithTag("Rocks");
         rocksHub = GameObject.FindGameObjectsWithTag("RocksHub");
+        engine = GetComponent<AudioSource>();
+        engine.Play();
+    }
+    private void Update()
+    {
+        rb = GetComponent<Rigidbody>();
+        engine.volume = Mathf.Clamp01(rb.velocity.magnitude / 100);
     }
 
     private void OnTriggerEnter(Collider col)
@@ -30,6 +43,15 @@ public class SphereRBScript : MonoBehaviour
 
         switch (col.gameObject.name) {
 
+            case "DoorToFinalLevel":
+                if (doorOnce && CarController.sledgeUnlock && CarController.speedBoatUnlock && CarController.trainUnlock)
+                {
+                    StartCoroutine(RotateDoor());
+                    doorOnce = false;
+                }
+
+                break;
+            
             case "TunnelCamera":
                 Vector3 newPosition = CameraController.cameraTarget.transform.position;
                 newPosition.y -= 5;
@@ -40,6 +62,9 @@ public class SphereRBScript : MonoBehaviour
                 Destroy(col.gameObject);
                 CarController.sledgeUnlock = true;
                 CarController.respawnCheckpoint = 2;
+                GameObject unlockSledge = GameObject.FindGameObjectWithTag("Unlock");
+                AudioSource sfxSledge = unlockSledge.GetComponent<AudioSource>();
+                sfxSledge.Play();
                 StartCoroutine(Wait());
                 break;
 
@@ -47,6 +72,9 @@ public class SphereRBScript : MonoBehaviour
                 Destroy(col.gameObject);
                 CarController.trainUnlock = true;
                 CarController.respawnCheckpoint = 2;
+                GameObject unlockTrain = GameObject.FindGameObjectWithTag("Unlock");
+                AudioSource sfxTrain = unlockTrain.GetComponent<AudioSource>();
+                sfxTrain.Play();
                 StartCoroutine(Wait());
                 break;
 
@@ -60,6 +88,9 @@ public class SphereRBScript : MonoBehaviour
                 CarController.speedBoatUnlock = true;
                 CarController.respawnCheckpoint = 2;
                 safeFromPirates = true;
+                GameObject unlockBoat = GameObject.FindGameObjectWithTag("Unlock");
+                AudioSource sfxBoat = unlockBoat.GetComponent<AudioSource>();
+                sfxBoat.Play();
                 StartCoroutine(Wait());
                 break;
 
@@ -87,23 +118,31 @@ public class SphereRBScript : MonoBehaviour
                 break;
 
             case "Rocks":
-                if (CarController.myState == CarController.State.Train)
+                if (CarController.myState == CarController.State.Train && rocksExploded == false)
                 {
+                    GameObject rocksExplode = GameObject.FindGameObjectWithTag("ExplodeRocks");
+                    AudioSource rocksSfx = rocksExplode.GetComponent<AudioSource>();
+                    rocksSfx.Play();                   
                     foreach (GameObject stone in rocks)
                     {
                         Rigidbody rb = stone.GetComponent<Rigidbody>();
                         rb.isKinematic = false;
                     }
+                    rocksExploded = true;
                 }
                 break;
             case "RocksHub":
-                if (CarController.myState == CarController.State.Train)
+                if (CarController.myState == CarController.State.Train && rocksHubExploded == false)
                 {
+                    GameObject rocksExplode = GameObject.FindGameObjectWithTag("ExplodeRocksHub");
+                    AudioSource rocksSfx = rocksExplode.GetComponent<AudioSource>();
+                    rocksSfx.Play();
                     foreach (GameObject stone in rocksHub)
                     {
                         Rigidbody rb = stone.GetComponent<Rigidbody>();
                         rb.isKinematic = false;
                     }
+                    rocksHubExploded = true;
                 }
                 break;
             case "WinGameTrigger":
@@ -140,6 +179,22 @@ public class SphereRBScript : MonoBehaviour
         anim.SetBool("UnlockBool", true);
         yield return new WaitForSeconds(3);
         anim.SetBool("UnlockBool", false);
+    }
+    IEnumerator RotateDoor()
+    {
+        if (doorOpen == false)
+        {
+            GameObject door = GameObject.FindGameObjectWithTag("DoorToFinalLevel");
+            for (int i = 0; i <= 90; i++)
+            {
+                door.transform.Rotate(0, -1, 0);
+                yield return new WaitForSeconds(.05f);
+            }
+            doorOpen = true;
+            yield return null;
+        }else{ 
+            yield return null;
+        }
     }
 }
 

@@ -26,7 +26,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = true, speedBoatUnlock = true, trainUnlock = true;
+    public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -344,6 +344,7 @@ public class CarController : MonoBehaviour
         // when health = 0, respawn
         if (health == 0)
         {
+            speedBoatUnlock = false;
             Debug.Log("You died");
             SceneManager.LoadScene("Water_Level");
         }

@@ -13,6 +13,8 @@ public class SphereRBScript : MonoBehaviour
     GameObject[] rocks;
     GameObject[] rocksHub;
     public CameraController CameraController;
+    public GameObject menu;
+    public GameObject winScreen;
 
     private void Start()
     {
@@ -103,6 +105,11 @@ public class SphereRBScript : MonoBehaviour
                         rb.isKinematic = false;
                     }
                 }
+                break;
+            case "WinGameTrigger":
+                menu.SetActive(true);
+                winScreen.SetActive(true);
+                Cursor.visible = true;
                 break;
 
             default:

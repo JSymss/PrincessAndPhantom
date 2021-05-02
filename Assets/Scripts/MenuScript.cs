@@ -9,15 +9,20 @@ public class MenuScript : MonoBehaviour
     public GameObject menu;
     public AudioSource carKeys;
     public GameObject controls;
+    public GameObject winScreen;
     private void Start()
     {
         menu.gameObject.SetActive(false);
         controls.gameObject.SetActive(false);
+        if (winScreen != null)
+        {
+            winScreen.gameObject.SetActive(false);
+        }
         Cursor.visible = false;
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && winScreen.activeSelf == false)
         {
             if (paused == false)
             {
@@ -49,6 +54,19 @@ public class MenuScript : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         SceneManager.LoadScene("Hub_Level");
     }
+    IEnumerator RestartGame()
+    {
+        carKeys.Play();
+        Time.timeScale = 1;
+        paused = false;
+        Cursor.visible = false;
+        CarController.sledgeUnlock = false;
+        CarController.speedBoatUnlock = false;
+        CarController.trainUnlock = false;
+        yield return new WaitForSeconds(.6f);
+        SceneManager.LoadScene("Hub_Level");
+        menu.gameObject.SetActive(false);
+    }
     public void PlayGame()
     {
         carKeys.Play();
@@ -56,6 +74,10 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
         Cursor.visible = false;
+    }
+    public void Restart()
+    {
+        StartCoroutine(RestartGame());
     }
     public void QuitGame()
     {

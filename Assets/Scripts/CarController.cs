@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CarController : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = true, speedBoatUnlock = true, trainUnlock = true;
+    public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
     bool jumping;
 
     public LayerMask groundLayer;
@@ -144,8 +145,8 @@ public class CarController : MonoBehaviour
         {
             sphereRB.drag = groundDrag;
             turnSpeed = 100f;
-            fwdSpeed = 250f;
-            revSpeed = 150f;
+            fwdSpeed = 225f;
+            revSpeed = 125f;
         }
         if (mySurface == Surface.Ice)
         {
@@ -157,9 +158,9 @@ public class CarController : MonoBehaviour
         if (mySurface == Surface.Water)
         {
             sphereRB.drag = waterDrag;
-            turnSpeed = 75f;
-            fwdSpeed = 200f;
-            revSpeed = 100f;
+            turnSpeed = 120f;
+            fwdSpeed = 150f;
+            revSpeed = 75f;
             if(myState != State.SpeedBoat)
             {
                 // respawn at this point if you're in water and not in a speedboat
@@ -230,7 +231,13 @@ public class CarController : MonoBehaviour
         {
             fwdSpeed = 300f;
             revSpeed = 150f;
-            turnSpeed = 30f;
+            turnSpeed = 25f;
+            if (mySurface != Surface.Ground && mySurface != Surface.Tracks)
+            {
+                fwdSpeed = 50f;
+                revSpeed = 25f;
+                turnSpeed = 15f;
+            }
         }
         // change vehicles
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -335,11 +342,7 @@ public class CarController : MonoBehaviour
         if (health == 0)
         {
             Debug.Log("You died");
-            transform.position = respawnPoint.transform.position;
-            transform.rotation = respawnPoint.transform.rotation;
-            sphereRB.velocity = new Vector3(0, 0, 0);
-            sphereRB.position = respawnPoint.transform.position;
-            sphereRB.transform.rotation = respawnPoint.transform.rotation;
+            SceneManager.LoadScene("Water_Level");
         }
     }
     private void FixedUpdate()

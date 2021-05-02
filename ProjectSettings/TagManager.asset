@@ -10,6 +10,7 @@ TagManager:
   - Pirate
   - MotorSphere
   - Rocks
+  - RocksHub
   layers:
   - Default
   - TransparentFX

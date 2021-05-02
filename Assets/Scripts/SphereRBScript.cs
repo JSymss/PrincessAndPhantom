@@ -11,6 +11,7 @@ public class SphereRBScript : MonoBehaviour
     public bool safeFromPirates = false;
     public CarController ccReference;
     GameObject[] rocks;
+    GameObject[] rocksHub;
     public CameraController CameraController;
 
     private void Start()
@@ -18,11 +19,7 @@ public class SphereRBScript : MonoBehaviour
         jettyTrack = GameObject.FindGameObjectWithTag("JettyTrack");
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
         rocks = GameObject.FindGameObjectsWithTag("Rocks");
-
-
-
-        
-
+        rocksHub = GameObject.FindGameObjectsWithTag("RocksHub");
     }
 
     private void OnTriggerEnter(Collider col)
@@ -75,6 +72,9 @@ public class SphereRBScript : MonoBehaviour
             case "DoorToWaterLevel":
                 SceneManager.LoadScene("Water_Level");
                 break;
+            case "DoorToForestLevel":
+                SceneManager.LoadScene("Forest_Level");
+                break;
 
             case "Respawn Point 3":
                 CarController.respawnCheckpoint = 3;
@@ -88,6 +88,16 @@ public class SphereRBScript : MonoBehaviour
                 if (CarController.myState == CarController.State.Train)
                 {
                     foreach (GameObject stone in rocks)
+                    {
+                        Rigidbody rb = stone.GetComponent<Rigidbody>();
+                        rb.isKinematic = false;
+                    }
+                }
+                break;
+            case "RocksHub":
+                if (CarController.myState == CarController.State.Train)
+                {
+                    foreach (GameObject stone in rocksHub)
                     {
                         Rigidbody rb = stone.GetComponent<Rigidbody>();
                         rb.isKinematic = false;

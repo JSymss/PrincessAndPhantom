@@ -24,7 +24,7 @@ public class CarController : MonoBehaviour
     public float jumpPower = 3000f;
     public static int respawnCheckpoint=1;
 
-    public static bool sledgeUnlock = false, speedBoatUnlock = true, trainUnlock = false;
+    public static bool sledgeUnlock = true, speedBoatUnlock = true, trainUnlock = true;
     bool jumping;
 
     public LayerMask groundLayer;

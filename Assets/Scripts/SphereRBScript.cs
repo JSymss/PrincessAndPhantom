@@ -7,29 +7,36 @@ public class SphereRBScript : MonoBehaviour
 {
     public Animator anim;
     GameObject jettyTrack;
-    GameObject[] jettyJumps;
+    GameObject[] jettyJumps, rocks, rocksHub;
     public bool safeFromPirates = false;
     public CarController ccReference;
-    GameObject[] rocks;
-    GameObject[] rocksHub;
     public CameraController CameraController;
-    public GameObject menu;
-    public GameObject winScreen;
+    public GameObject menu, winScreen;
     Rigidbody rb;
+    Rigidbody[] rocksRB;
     AudioSource engine;
-    bool doorOpen = false;
-    bool doorOnce = true;
-    bool rocksExploded = false;
-    bool rocksHubExploded = false;
+    bool doorOpen = false, doorOnce = true, rocksHubExploded = false;
+    bool[] rocksExploded;
 
     private void Start()
     {
         jettyTrack = GameObject.FindGameObjectWithTag("JettyTrack");
         jettyJumps = GameObject.FindGameObjectsWithTag("JettyJump");
-        rocks = GameObject.FindGameObjectsWithTag("Rocks");
-        rocksHub = GameObject.FindGameObjectsWithTag("RocksHub");
         engine = GetComponent<AudioSource>();
         engine.Play();
+        rocks = GameObject.FindGameObjectsWithTag("Rocks");
+        rocksHub = GameObject.FindGameObjectsWithTag("RocksHub");
+        rocksExploded = new bool[rocks.Length];
+        for (int i = 0; i < rocksExploded.Length; i++)
+        {
+            rocksExploded[i] = false;
+        }
+        rocksRB = new Rigidbody[rocks.Length];
+        for (int i = 0; i < rocksRB.Length; i++)
+        {
+            rocksRB[i] = rocks[i].GetComponent<Rigidbody>();
+            rocksRB[i].isKinematic = true;
+        }
     }
     private void Update()
     {
@@ -84,6 +91,10 @@ public class SphereRBScript : MonoBehaviour
                 {
                     Destroy(ramp);
                 }
+                foreach (GameObject stone in rocks)
+                {
+                    Destroy(stone);
+                }
                 Destroy(jettyTrack);
                 CarController.speedBoatUnlock = true;
                 CarController.respawnCheckpoint = 2;
@@ -118,17 +129,16 @@ public class SphereRBScript : MonoBehaviour
                 break;
 
             case "Rocks":
-                if (CarController.myState == CarController.State.Train && rocksExploded == false)
+                for (int i = 0; i < rocks.Length; i++)
                 {
-                    GameObject rocksExplode = GameObject.FindGameObjectWithTag("ExplodeRocks");
-                    AudioSource rocksSfx = rocksExplode.GetComponent<AudioSource>();
-                    rocksSfx.Play();                   
-                    foreach (GameObject stone in rocks)
+                    if (CarController.myState == CarController.State.Train && rocksExploded[i] == false)
                     {
-                        Rigidbody rb = stone.GetComponent<Rigidbody>();
-                        rb.isKinematic = false;
+                        GameObject rocksExplode = GameObject.FindGameObjectWithTag("ExplodeRocks");
+                        AudioSource rocksSfx = rocksExplode.GetComponent<AudioSource>();
+                        rocksSfx.Play();
+                        rocksRB[i].isKinematic = false;
+                        rocksExploded[i] = true;
                     }
-                    rocksExploded = true;
                 }
                 break;
             case "RocksHub":

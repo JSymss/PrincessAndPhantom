@@ -6,14 +6,8 @@ using UnityEngine.SceneManagement;
 public class MenuScript : MonoBehaviour
 {
     bool paused = false;
-    public GameObject menu;
+    public GameObject menu, controls, winScreen, healthBar, heart1, heart2, heart3;
     public AudioSource carKeys;
-    public GameObject controls;
-    public GameObject winScreen;
-    public GameObject healthBar;
-    public GameObject heart1;
-    public GameObject heart2;
-    public GameObject heart3;
     GameObject player;
     private void Start()
     {

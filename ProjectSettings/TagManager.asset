@@ -16,6 +16,7 @@ TagManager:
   - Unlock
   - ExplodeRocks
   - ExplodeRocksHub
+  - TrainTracks
   layers:
   - Default
   - TransparentFX

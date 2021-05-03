@@ -7,46 +7,17 @@ using UnityEngine.SceneManagement;
 public class CarController : MonoBehaviour
 {
     public Rigidbody sphereRB;
-
-    float moveInput;
-    float turnInput;
-
+    float moveInput, turnInput;
     public int health = 3;
-
-    public float groundDrag;
-    public float iceDrag;
-    public float waterDrag;
-    public float tracksDrag;
-    public float airDrag;
-    public float smoothCarRotation = 1f;
-    public float gravity;
-    public float fwdSpeed;
-    public float revSpeed;
-    public float turnSpeed;
-    public float jumpPower = 3000f;
+    public float groundDrag, iceDrag, waterDrag, tracksDrag, airDrag, smoothCarRotation = 1f, gravity, fwdSpeed, revSpeed, turnSpeed, jumpPower = 3000f, maxWheelTurn = 25;
     public static int respawnCheckpoint=1;
-
     public static bool sledgeUnlock = false, speedBoatUnlock = false, trainUnlock = false;
     bool jumping;
-
-    public LayerMask groundLayer;
-    public LayerMask iceLayer;
-    public LayerMask waterLayer;
-    public LayerMask tracksLayer;
-
+    public LayerMask groundLayer, iceLayer, waterLayer, tracksLayer;
     public Transform leftFrontWheel, rightFrontWheel;
-    public float maxWheelTurn = 25;
-
-    public GameObject carMesh;
-    public GameObject wheelMesh;
-    public GameObject sledgeMesh;
-    public GameObject trainMesh;
-    public GameObject speedBoatMesh;
-    public GameObject respawnPoint, respawnPoint2, respawnPoint3;
-    public GameObject iceTerrainCheckpoint;
-
-    public RawImage carImage, sledgeImage, speedboatImage, trainImage;
-    public RawImage sledgeImageLock, speedboatImageLock, trainImageLock;
+    public GameObject carMesh, wheelMesh, sledgeMesh, trainMesh, speedBoatMesh, respawnPoint, respawnPoint2, respawnPoint3, iceTerrainCheckpoint;
+    GameObject[] trainTracks;
+    public RawImage carImage, sledgeImage, speedboatImage, trainImage, sledgeImageLock, speedboatImageLock, trainImageLock;
     public enum Surface { Ground, Ice, Water, Tracks, Air };
     Surface mySurface;
     public enum State { Car, Sledge, SpeedBoat, Train };
@@ -71,7 +42,7 @@ public class CarController : MonoBehaviour
 
         respawnCheckpoint = 1;
         health = 3;
-
+        trainTracks = GameObject.FindGameObjectsWithTag("TrainTracks");
     }
 
 
@@ -255,6 +226,10 @@ public class CarController : MonoBehaviour
             sledgeImage.color = new Color32(80, 80, 80, 150);
             speedboatImage.color = new Color32(80, 80, 80, 150);
             trainImage.color = new Color32(80, 80, 80, 150);
+            foreach (GameObject trainTrack in trainTracks)
+            {
+                trainTrack.GetComponentInChildren<BoxCollider>().enabled = false;
+            }
             GetComponent<analyticsEventManager>().VehicleState();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2)&&sledgeUnlock==true)
@@ -271,6 +246,10 @@ public class CarController : MonoBehaviour
             carImage.color = new Color32(80, 80, 80, 150);
             speedboatImage.color = new Color32(80, 80, 80, 150);
             trainImage.color = new Color32(80, 80, 80, 150);
+            foreach (GameObject trainTrack in trainTracks)
+            {
+                trainTrack.GetComponentInChildren<BoxCollider>().enabled = false;
+            }
             GetComponent<analyticsEventManager>().VehicleState();
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && speedBoatUnlock == true)
@@ -287,6 +266,10 @@ public class CarController : MonoBehaviour
             carImage.color = new Color32(80, 80, 80, 150);
             sledgeImage.color = new Color32(80, 80, 80, 150);
             trainImage.color = new Color32(80, 80, 80, 150);
+            foreach (GameObject trainTrack in trainTracks)
+            {
+                trainTrack.GetComponentInChildren<BoxCollider>().enabled = false;
+            }
             GetComponent<analyticsEventManager>().VehicleState();
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && trainUnlock == true)
@@ -303,6 +286,10 @@ public class CarController : MonoBehaviour
             carImage.color = new Color32(80, 80, 80, 150);
             sledgeImage.color = new Color32(80, 80, 80, 150);
             speedboatImage.color = new Color32(80, 80, 80, 150);
+            foreach (GameObject trainTrack in trainTracks)
+            {
+                trainTrack.GetComponentInChildren<BoxCollider>().enabled = true;
+            }
             GetComponent<analyticsEventManager>().VehicleState();
         }
         if (Input.GetKeyDown(KeyCode.Space)&& mySurface != Surface.Air)
@@ -344,9 +331,31 @@ public class CarController : MonoBehaviour
         // when health = 0, respawn
         if (health == 0)
         {
-            speedBoatUnlock = false;
-            Debug.Log("You died");
-            SceneManager.LoadScene("Water_Level");
+            if (respawnCheckpoint == 1)
+            {
+                transform.position = respawnPoint.transform.position;
+                transform.rotation = respawnPoint.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint.transform.position;
+                sphereRB.transform.rotation = respawnPoint.transform.rotation;
+            }
+            else if (respawnCheckpoint == 2)
+            {
+                transform.position = respawnPoint2.transform.position;
+                transform.rotation = respawnPoint2.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint2.transform.position;
+                sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+            }
+            else if (respawnCheckpoint == 3)
+            {
+                transform.position = respawnPoint3.transform.position;
+                transform.rotation = respawnPoint3.transform.rotation;
+                sphereRB.velocity = new Vector3(0, 0, 0);
+                sphereRB.position = respawnPoint3.transform.position;
+                sphereRB.transform.rotation = respawnPoint3.transform.rotation;
+            }
+            health = 3;
         }
     }
     private void FixedUpdate()

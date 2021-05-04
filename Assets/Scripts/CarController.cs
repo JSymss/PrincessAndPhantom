@@ -22,6 +22,7 @@ public class CarController : MonoBehaviour
     Surface mySurface;
     public enum State { Car, Sledge, SpeedBoat, Train };
     public static State myState;
+    analyticsEventManager analytics;
     void Start()
     {
         // detatch the rigidbody from the car
@@ -43,6 +44,7 @@ public class CarController : MonoBehaviour
         respawnCheckpoint = 1;
         health = 3;
         trainTracks = GameObject.FindGameObjectsWithTag("TrainTracks");
+        analytics = GetComponent<analyticsEventManager>();
     }
 
 
@@ -143,6 +145,8 @@ public class CarController : MonoBehaviour
                     sphereRB.velocity = new Vector3(0, 0, 0);
                     sphereRB.position = respawnPoint.transform.position;
                     sphereRB.transform.rotation = respawnPoint.transform.rotation;
+                    analytics.IncrementDeaths();
+                    analytics.ActiveScene();
                 }
                 else if (respawnCheckpoint == 2)
                 {
@@ -151,6 +155,8 @@ public class CarController : MonoBehaviour
                     sphereRB.velocity = new Vector3(0, 0, 0);
                     sphereRB.position = respawnPoint2.transform.position;
                     sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+                    analytics.IncrementDeaths();
+                    analytics.ActiveScene();
                 }
                 else if (respawnCheckpoint == 3)
                 {
@@ -159,6 +165,8 @@ public class CarController : MonoBehaviour
                     sphereRB.velocity = new Vector3(0, 0, 0);
                     sphereRB.position = respawnPoint3.transform.position;
                     sphereRB.transform.rotation = respawnPoint3.transform.rotation;
+                    analytics.IncrementDeaths();
+                    analytics.ActiveScene();
                 }
             }
         }
@@ -310,6 +318,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0,0,0);
                 sphereRB.position = respawnPoint.transform.position;
                 sphereRB.transform.rotation = respawnPoint.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
             else if (respawnCheckpoint == 2)
             {
@@ -318,6 +328,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint2.transform.position;
                 sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
             else if (respawnCheckpoint == 3)
             {
@@ -326,6 +338,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint3.transform.position;
                 sphereRB.transform.rotation = respawnPoint3.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
         }
         // when health = 0, respawn
@@ -338,6 +352,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint.transform.position;
                 sphereRB.transform.rotation = respawnPoint.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
             else if (respawnCheckpoint == 2)
             {
@@ -346,6 +362,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint2.transform.position;
                 sphereRB.transform.rotation = respawnPoint2.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
             else if (respawnCheckpoint == 3)
             {
@@ -354,6 +372,8 @@ public class CarController : MonoBehaviour
                 sphereRB.velocity = new Vector3(0, 0, 0);
                 sphereRB.position = respawnPoint3.transform.position;
                 sphereRB.transform.rotation = respawnPoint3.transform.rotation;
+                analytics.IncrementDeaths();
+                analytics.ActiveScene();
             }
             health = 3;
         }

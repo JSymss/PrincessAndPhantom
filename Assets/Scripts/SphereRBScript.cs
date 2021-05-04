@@ -17,6 +17,7 @@ public class SphereRBScript : MonoBehaviour
     AudioSource engine;
     bool doorOpen = false, doorOnce = true, rocksHubExploded = false;
     bool[] rocksExploded;
+    analyticsEventManager analytics;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class SphereRBScript : MonoBehaviour
             rocksRB[i] = rocks[i].GetComponent<Rigidbody>();
             rocksRB[i].isKinematic = true;
         }
+        analytics = GameObject.FindGameObjectWithTag("Player").GetComponent<analyticsEventManager>();
     }
     private void Update()
     {
@@ -56,7 +58,7 @@ public class SphereRBScript : MonoBehaviour
                     StartCoroutine(RotateDoor());
                     doorOnce = false;
                 }
-
+                analytics.ActiveScene();
                 break;
             
             case "TunnelCamera":
@@ -73,6 +75,7 @@ public class SphereRBScript : MonoBehaviour
                 AudioSource sfxSledge = unlockSledge.GetComponent<AudioSource>();
                 sfxSledge.Play();
                 StartCoroutine(Wait());
+                analytics.VehiclesUnlocked();
                 break;
 
             case "Train Unlock":
@@ -83,6 +86,7 @@ public class SphereRBScript : MonoBehaviour
                 AudioSource sfxTrain = unlockTrain.GetComponent<AudioSource>();
                 sfxTrain.Play();
                 StartCoroutine(Wait());
+                analytics.VehiclesUnlocked();
                 break;
 
             // destroys the jetty track, unlocks the speedboat, sets respawn point to the town, stops pirates shooting at player when they're in the town, and calls the unlock animation
@@ -103,21 +107,26 @@ public class SphereRBScript : MonoBehaviour
                 AudioSource sfxBoat = unlockBoat.GetComponent<AudioSource>();
                 sfxBoat.Play();
                 StartCoroutine(Wait());
+                analytics.VehiclesUnlocked();
                 break;
 
             case "DoorToIceLevel":
                 SceneManager.LoadScene("Ice_Level");
+                analytics.ActiveScene();
                 break;
 
             case "DoorToHubLevel":
                 SceneManager.LoadScene("Hub_Level");
+                analytics.ActiveScene();
                 break;
 
             case "DoorToWaterLevel":
                 SceneManager.LoadScene("Water_Level");
+                analytics.ActiveScene();
                 break;
             case "DoorToForestLevel":
                 SceneManager.LoadScene("Forest_Level");
+                analytics.ActiveScene();
                 break;
 
             case "Respawn Point 3":
@@ -126,6 +135,7 @@ public class SphereRBScript : MonoBehaviour
 
             case "DoorToIceTerrain":
                 ccReference.TeleportToIceTerrain();
+                analytics.ActiveScene();
                 break;
 
             case "Rocks":

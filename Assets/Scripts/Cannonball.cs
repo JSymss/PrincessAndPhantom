@@ -7,7 +7,8 @@ public class Cannonball : MonoBehaviour
     public float speed, projectileLifetime;
     Transform player;
     Vector3 target;
-    
+    analyticsEventManager analytics;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class Cannonball : MonoBehaviour
         target = new Vector3(player.position.x, player.position.y, player.position.z);
         // destroy cannonballs after their set lifetime
         Destroy(gameObject, projectileLifetime);
+        analytics = GameObject.FindGameObjectWithTag("Player").GetComponent<analyticsEventManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class Cannonball : MonoBehaviour
         {
             //player takes damage
             player.GetComponent<CarController>().health--;
+            analytics.TakeCannonDamage();
             DestroyProjectile();
         }
     }

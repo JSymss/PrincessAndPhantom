@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    bool paused = false;
+    public bool paused = false;
     public GameObject menu, controls, winScreen, healthBar, heart1, heart2, heart3;
     public AudioSource carKeys;
     GameObject player;
+    analyticsEventManager analytics;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -31,6 +32,7 @@ public class MenuScript : MonoBehaviour
             winScreen.gameObject.SetActive(false);
         }
         Cursor.visible = false;
+        analytics = GameObject.FindGameObjectWithTag("Player").GetComponent<analyticsEventManager>();
     }
     private void Update()
     {
@@ -42,6 +44,7 @@ public class MenuScript : MonoBehaviour
                 Time.timeScale = 0;
                 paused = true;
                 Cursor.visible = true;
+                analytics.InteractionWithUI();
             }
             else
             {
@@ -49,6 +52,7 @@ public class MenuScript : MonoBehaviour
                 Time.timeScale = 1;
                 paused = false;
                 Cursor.visible = false;
+                analytics.InteractionWithUI();
             }
         }
         switch(player.GetComponent<CarController>().health)
@@ -86,6 +90,7 @@ public class MenuScript : MonoBehaviour
         Cursor.visible = false;
         yield return new WaitForSeconds(.6f);
         SceneManager.LoadScene("Hub_Level");
+        analytics.InteractionWithUI();
     }
     IEnumerator RestartGame()
     {
@@ -99,6 +104,7 @@ public class MenuScript : MonoBehaviour
         yield return new WaitForSeconds(.6f);
         SceneManager.LoadScene("Hub_Level");
         menu.gameObject.SetActive(false);
+        analytics.InteractionWithUI();
     }
     public void PlayGame()
     {
@@ -107,6 +113,7 @@ public class MenuScript : MonoBehaviour
         Time.timeScale = 1;
         paused = false;
         Cursor.visible = false;
+        analytics.InteractionWithUI();
     }
     public void Restart()
     {
@@ -122,10 +129,12 @@ public class MenuScript : MonoBehaviour
     {
         carKeys.Play();
         controls.gameObject.SetActive(true);
+        analytics.InteractionWithUI();
     }
     public void BackToMenu()
     {
         carKeys.Play();
         controls.gameObject.SetActive(false);
+        analytics.InteractionWithUI();
     }
 }

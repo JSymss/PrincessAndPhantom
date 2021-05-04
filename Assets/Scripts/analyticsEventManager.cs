@@ -11,10 +11,10 @@ public class analyticsEventManager : MonoBehaviour
     public enum GamePlayState { InProgress, Finished }
     Scene thisScene;
     LevelPlayState levelState = LevelPlayState.InProgress;
-    GamePlayState gameState = GamePlayState.InProgress;
     float secondsElapsed = 0;
-    int deaths = 0;
+    int deaths = 0, cannonballStrikes = 0;
     Dictionary<string, object> customParams = new Dictionary<string, object>();
+    MenuScript menuUI;
 
     void Awake()
     {
@@ -23,6 +23,7 @@ public class analyticsEventManager : MonoBehaviour
 	        {
 	            { "value", "1" },
 	        });
+        menuUI = GameObject.FindGameObjectWithTag("MenuManager").GetComponent<MenuScript>();
     }
 
     public void SetLevelPlayState (LevelPlayState newState)
@@ -30,9 +31,23 @@ public class analyticsEventManager : MonoBehaviour
         this.levelState = newState;
     }
 
+    public void ActiveScene()
+    {
+        thisScene = SceneManager.GetActiveScene();
+        Analytics.CustomEvent("current_scene", new Dictionary<string, object>
+            {
+                { "scene", thisScene },
+            });
+    }
+
     public void IncrementDeaths()
     {
         deaths++;
+    }
+
+    public void TakeCannonDamage()
+    {
+        cannonballStrikes++;
     }
 
     public void VehicleState()
@@ -67,6 +82,72 @@ public class analyticsEventManager : MonoBehaviour
         }
     }
 
+    public void InteractionWithUI()
+    {
+        if (menuUI.paused == false)
+        {
+            Analytics.CustomEvent("game_paused", new Dictionary<string, object>
+        {
+            {"game_is_paused", "false" }
+        });
+        }
+        else if (menuUI.paused == true)
+        {
+            Analytics.CustomEvent("game_paused", new Dictionary<string, object>
+        {
+            {"game_is_paused", "true" }
+        });
+        }
+
+        if (menuUI.controls.activeSelf == true)
+        {
+            Analytics.CustomEvent("controls_viewed", new Dictionary<string, object>
+        {
+            {"controls", "viewed" }
+        });
+        }
+        else if (menuUI.controls.activeSelf == false)
+        {
+            Analytics.CustomEvent("controls_viewed", new Dictionary<string, object>
+        {
+            {"controls", "not_viewed" }
+        });
+        }
+
+        if (thisScene.name == "Hub_Level")
+        {
+            Analytics.CustomEvent("restart_or_returnToHub", new Dictionary<string, object>
+        {
+            {"gave_up", "true" }
+        });
+        }
+    }
+
+    public void VehiclesUnlocked()
+    {
+        if (CarController.sledgeUnlock == true)
+        {
+            Analytics.CustomEvent("vehicle_unlocked", new Dictionary<string, object>
+                {
+                    { "type", "sledge" }
+                });
+        }
+        else if (CarController.trainUnlock == true)
+        {
+            Analytics.CustomEvent("vehicle_unlocked", new Dictionary<string, object>
+                {
+                    { "type", "train" }
+                });
+        }
+        else if (CarController.speedBoatUnlock == true)
+        {
+            Analytics.CustomEvent("vehicle_unlocked", new Dictionary<string, object>
+                {
+                    { "type", "speedboat" }
+                });
+        }
+    }
+
     void Update()
     {
         secondsElapsed += Time.deltaTime;
@@ -84,6 +165,7 @@ public class analyticsEventManager : MonoBehaviour
 		            { "condition", "win" },
 		            { "seconds_played", secondsElapsed },
 		            { "deaths", deaths },
+                    {"cannonball_strikes", cannonballStrikes },
 		        });
                 break;
             case LevelPlayState.Lost:
@@ -92,7 +174,8 @@ public class analyticsEventManager : MonoBehaviour
 		            { "condition", "lost" },
 		            { "seconds_played", secondsElapsed },
 		            { "deaths", deaths },
-		        });
+                    {"cannonball_strikes", cannonballStrikes },
+                });
                 break;
             case LevelPlayState.InProgress:
             case LevelPlayState.Quit:
@@ -102,18 +185,9 @@ public class analyticsEventManager : MonoBehaviour
 		            { "condition", "quit" },
 		            { "seconds_played", secondsElapsed },
 		            { "deaths", deaths },
-		        });
+                    {"cannonball_strikes", cannonballStrikes },
+                });
                 break;
-        }
-
-        if (this.gameState == GamePlayState.Finished)
-        {
-            Analytics.CustomEvent("gameEnded", new Dictionary<string, object>
-		        {
-		            { "condition", "gameOver?" },
-		            { "seconds_played", secondsElapsed },
-		            { "deaths", deaths },
-		        });
         }
     }
 }

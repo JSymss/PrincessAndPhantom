@@ -119,7 +119,7 @@ public class CarController : MonoBehaviour
         {
             sphereRB.drag = groundDrag;
             turnSpeed = 100f;
-            fwdSpeed = 225f;
+            fwdSpeed = 240f;
             revSpeed = 125f;
         }
         if (mySurface == Surface.Ice)
@@ -132,8 +132,8 @@ public class CarController : MonoBehaviour
         if (mySurface == Surface.Water)
         {
             sphereRB.drag = waterDrag;
-            turnSpeed = 120f;
-            fwdSpeed = 150f;
+            turnSpeed = 90f;
+            fwdSpeed = 175f;
             revSpeed = 75f;
             if(myState != State.SpeedBoat)
             {
@@ -174,7 +174,7 @@ public class CarController : MonoBehaviour
         {
             sphereRB.drag = tracksDrag;
             turnSpeed = 25f;
-            fwdSpeed = 200f;
+            fwdSpeed = 300f;
             revSpeed = 100f;
         }
         if (mySurface == Surface.Air)

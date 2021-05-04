@@ -23,7 +23,7 @@ public class analyticsEventManager : MonoBehaviour
 	        {
 	            { "value", "1" },
 	        });
-        menuUI = GameObject.FindGameObjectWithTag("MenuManager").GetComponent<MenuScript>();
+        //menuUI = GameObject.FindGameObjectWithTag("MenuManager").GetComponent<MenuScript>();
     }
 
     public void SetLevelPlayState (LevelPlayState newState)

@@ -18,6 +18,9 @@ public class SphereRBScript : MonoBehaviour
     bool doorOpen = false, doorOnce = true, rocksHubExploded = false;
     bool[] rocksExploded;
     analyticsEventManager analytics;
+    public GameObject dialogForest;
+    public GameObject dialogWater;
+    public GameObject dialogIce;
 
     private void Start()
     {
@@ -169,6 +172,39 @@ public class SphereRBScript : MonoBehaviour
                 menu.SetActive(true);
                 winScreen.SetActive(true);
                 Cursor.visible = true;
+                break;
+            case "F_Dialog1":
+                StartCoroutine(dialogForest.GetComponent<F_DialogManager>().F_clip1());
+                break;
+            case "F_Dialog2":
+                StartCoroutine(dialogForest.GetComponent<F_DialogManager>().F_clip2());
+                break;
+            case "F_Dialog3":
+                StartCoroutine(dialogForest.GetComponent<F_DialogManager>().F_clip3());
+                break;
+            case "W_Dialog1":
+                StartCoroutine(dialogWater.GetComponent<W_DialogManager>().W_clip1());
+                break;
+            case "W_Dialog2":
+                StartCoroutine(dialogWater.GetComponent<W_DialogManager>().W_clip2());
+                break;
+            case "W_Dialog3":
+                StartCoroutine(dialogWater.GetComponent<W_DialogManager>().W_clip3());
+                break;
+            case "W_Dialog4":
+                StartCoroutine(dialogWater.GetComponent<W_DialogManager>().W_clip4());
+                break;
+            case "I_Dialog1":
+                StartCoroutine(dialogIce.GetComponent<I_DialogManager>().I_clip1());
+                break;
+            case "I_Dialog2":
+                StartCoroutine(dialogIce.GetComponent<I_DialogManager>().I_clip2());
+                break;
+            case "I_Dialog3":
+                StartCoroutine(dialogIce.GetComponent<I_DialogManager>().I_clip3());
+                break;
+            case "I_Dialog4":
+                StartCoroutine(dialogIce.GetComponent<I_DialogManager>().I_clip4());
                 break;
 
             default:

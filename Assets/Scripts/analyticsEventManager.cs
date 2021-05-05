@@ -155,7 +155,13 @@ public class analyticsEventManager : MonoBehaviour
 
     void OnDestroy()
     {
-
+        Analytics.CustomEvent("gameEnded", new Dictionary<string, object>
+                {
+                    { "condition", "win" },
+                    { "seconds_played", secondsElapsed },
+                    { "deaths", deaths },
+                    {"cannonball_strikes", cannonballStrikes },
+                });
 
         switch (this.levelState)
         {

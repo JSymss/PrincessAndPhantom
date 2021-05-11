@@ -2061,21 +2061,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 55422003}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &55422006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 55422005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &55422007
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3961,21 +3946,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 141730606}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &141730609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141730608}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &141730610
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7540,21 +7510,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 256508287}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &256508290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256508289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &256508291
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13382,21 +13337,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 448789559}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &448789562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448789561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &448789563
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15085,21 +15025,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 512086371}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &512086374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512086373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &512086375
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19609,21 +19534,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 694644719}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &694644722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 694644721}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &694644723
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20663,21 +20573,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 721106946}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &721106949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721106948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &721106950
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21706,21 +21601,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 764963226}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &764963229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 764963228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &764963230
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26525,21 +26405,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 953609757}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &953609760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 953609759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &953609761
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27089,21 +26954,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 966891236}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &966891239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966891238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &966891240
 AudioSource:
   m_ObjectHideFlags: 0
@@ -28127,21 +27977,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 996109462}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &996109465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996109464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &996109466
 AudioSource:
   m_ObjectHideFlags: 0
@@ -28859,21 +28694,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1010718795}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1010718798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010718797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1010718799
 AudioSource:
   m_ObjectHideFlags: 0
@@ -33458,21 +33278,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1146623262}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1146623265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146623264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1146623266
 AudioSource:
   m_ObjectHideFlags: 0
@@ -36378,8 +36183,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
+  turnSpeed: 35
+  startTimeBtwShots: 2
+  nearDistance: 2
+  stoppingDistance: 5
+  speed: 10
   shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1272308516
 AudioSource:
@@ -36878,21 +36686,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1282570174}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1282570177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282570176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1282570178
 AudioSource:
   m_ObjectHideFlags: 0
@@ -40779,21 +40572,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1402843050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1402843053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1402843052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1402843054
 AudioSource:
   m_ObjectHideFlags: 0
@@ -42776,21 +42554,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1466100880}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1466100883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466100882}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1466100884
 AudioSource:
   m_ObjectHideFlags: 0
@@ -47096,21 +46859,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1627986396}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1627986399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1627986398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1627986400
 AudioSource:
   m_ObjectHideFlags: 0
@@ -50273,21 +50021,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1739358351}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1739358354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739358353}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1739358355
 AudioSource:
   m_ObjectHideFlags: 0
@@ -55769,21 +55502,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1888460145}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1888460148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888460147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ee00d0e93c9d14a9dedfc7515afc14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnSpeed: 100
-  startTimeBtwShots: 30
-  shot: {fileID: 1000012237891472, guid: 6e3d105a54c16594a98794e5c1549524, type: 3}
 --- !u!82 &1888460149
 AudioSource:
   m_ObjectHideFlags: 0

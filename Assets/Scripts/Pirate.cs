@@ -6,7 +6,7 @@ public class Pirate : MonoBehaviour
 {
     GameObject[] pirates;
     GameObject player;
-    public float turnSpeed, startTimeBtwShots;
+    public float turnSpeed, startTimeBtwShots, nearDistance, stoppingDistance, speed;
     float timeBtwShots;
     public GameObject shot;
     bool safe;
@@ -33,9 +33,23 @@ public class Pirate : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(pirates[i].transform.forward, vectorToTarget, step, 0.0f);
                 pirates[i].transform.rotation = Quaternion.LookRotation(newDirection);
 
+                if (Vector3.Distance(pirates[i].transform.position, player.transform.position) < nearDistance)
+                {
+                    pirates[i].transform.position = Vector3.MoveTowards(pirates[i].transform.position, new Vector3(player.transform.position.x, pirates[i].transform.position.y, player.transform.position.z), -speed * Time.deltaTime);
+                }
+                else if (Vector3.Distance(pirates[i].transform.position, player.transform.position) > stoppingDistance)
+                {
+                    pirates[i].transform.position = Vector3.MoveTowards(pirates[i].transform.position, new Vector3(player.transform.position.x, pirates[i].transform.position.y, player.transform.position.z), speed * Time.deltaTime);
+                }
+                else if (Vector3.Distance(pirates[i].transform.position, player.transform.position) < stoppingDistance && Vector3.Distance(pirates[i].transform.position, player.transform.position) > nearDistance)
+                {
+                    pirates[i].transform.position = pirates[i].transform.position;
+                }
+
                 if (timeBtwShots <= 0)
                 {
                     Instantiate(shot, pirates[i].transform.position, Quaternion.identity);
+                    //StartCoroutine(CannonFire());
                     timeBtwShots = startTimeBtwShots;
                 }
                 else
@@ -45,4 +59,15 @@ public class Pirate : MonoBehaviour
             }
         }
     }
+
+    /*IEnumerator CannonFire()
+    {
+        for (int i = 0; i < pirates.Length; i++)
+        {
+            Instantiate(shot, pirates[i].transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(60f);
+        }
+
+        yield break;
+    }*/
 }
